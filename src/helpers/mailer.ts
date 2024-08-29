@@ -1,27 +1,69 @@
 import nodemailer from "nodemailer";
+import bcryptjs from "bcryptjs";
+import User from "@/models/user.model";
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
     try {
+        const hashedToken = await bcryptjs.hash(userId.toString(), 10);
+
+        if (emailType === "VERIFY") {
+            await User.findByIdAndUpdate(userId, {
+                verifyToken: hashedToken,
+                verifyTokenExpiry: Date.now() + 600000,
+            });
+        } else {
+            await User.findByIdAndUpdate(userId, {
+                forgotPasswordToken: hashedToken,
+                forgotPasswordTokenExpiry: Date.now() + 600000,
+            });
+        }
+
         const transporter = nodemailer.createTransport({
-            host: "smtp.ethereal.email",
-            port: 587,
-            secure: false, // Use `true` for port 465, `false` for all other ports
+            host: "abcxyz.host",
+            port: 123,
             auth: {
-                user: "maddison53@ethereal.email",
-                pass: "jn7jnAPss4f63QBp6D",
+                user: "abcde",
+                pass: "xyz@123",
             },
         });
 
         const mailOption = {
-            from: "mayurmewada00@gmail.com",
+            from: "mail@provider.com",
             to: email,
             subject: emailType === "VERIFY" ? "Verify your Email" : "Reset your Password",
-            html: "<b>Hello world?</b>",
+            html:
+                emailType === "VERIFY"
+                    ? `<!DOCTYPE html>
+                        <html lang="en">
+                            <head>
+                                <meta charset="UTF-8" />
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                <title>Document</title>
+                            </head>
+                            <body>
+                                <h2>Please Verify your account</h2>
+                                <p>Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> to verify your account</p>
+                                <p>Physical link ${process.env.DOMAIN}/verifyemail?token=${hashedToken}</p>
+                            </body>
+                        </html>`
+                    : `<!DOCTYPE html>
+                        <html lang="en">
+                            <head>
+                                <meta charset="UTF-8" />
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                <title>Document</title>
+                            </head>
+                            <body>
+                                <h2>Password Reset</h2>
+                                <p>Click <a href="${process.env.DOMAIN}/resetpassword?token=${hashedToken}">here</a> to reset your password</p>
+                                <p>Physical link ${process.env.DOMAIN}/resetpassword?token=${hashedToken}</p>
+                            </body>
+                        </html>`,
         };
 
         const mailResponse = await transporter.sendMail(mailOption);
         return mailResponse;
     } catch (error: any) {
-        throw new error(error)
+        throw new error(error);
     }
 };

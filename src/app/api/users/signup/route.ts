@@ -8,9 +8,9 @@ dbConnect();
 
 export const POST = async (request: NextRequest) => {
     try {
-        const requestBody = request.json();
+        const requestBody = await request.json();
         console.log(requestBody);
-        const { username, email, password }: any = requestBody;
+        const { username, email, password } = requestBody;
 
         const user = await User.findOne({ email });
 
@@ -31,6 +31,7 @@ export const POST = async (request: NextRequest) => {
             return NextResponse.json({
                 status: 200,
                 message: "User Register Successfully",
+                userCreated
             });
         }
     } catch (error: any) {

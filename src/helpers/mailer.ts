@@ -19,16 +19,16 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         }
 
         const transporter = nodemailer.createTransport({
-            host: "abcxyz.host",
-            port: 123,
+            host: String(process.env.EMAILCRED_HOST),
+            port: Number(process.env.EMAILCRED_PORT),
             auth: {
-                user: "abcde",
-                pass: "xyz@123",
+                user: process.env.EMAILCRED_USER,
+                pass: process.env.EMAILCRED_PASS,
             },
         });
 
         const mailOption = {
-            from: "mail@provider.com",
+            from: process.env.EMAILFROM,
             to: email,
             subject: emailType === "VERIFY" ? "Verify your Email" : "Reset your Password",
             html:
@@ -62,6 +62,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         };
 
         const mailResponse = await transporter.sendMail(mailOption);
+        console.log("user registered and email sent successfully")
         return mailResponse;
     } catch (error: any) {
         throw new error(error);

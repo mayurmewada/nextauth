@@ -1,9 +1,9 @@
+// module imports
 import { useTranslations } from "next-intl";
 import React from "react";
 
 const Page = () => {
     const t = useTranslations("login");
-    console.log(t)
 
     return (
         <div className="flex flex-col items-center justify-center h-[100vh]">

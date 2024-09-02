@@ -1,4 +1,6 @@
+// module imports
 import { NextRequest, NextResponse } from "next/server";
+// file imports
 import { dbConnect } from "@/db/connection";
 import userModel from "@/models/user.model";
 import { verifyToken } from "@/helpers/decodeToken";

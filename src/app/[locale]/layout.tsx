@@ -1,7 +1,9 @@
+// module imports
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+// file imports
 import "./globals.css";
-import LanguageSelector from "../components/LanguageSelector";
+import LanguageSelector from "@/app/components/LanguageSelector";
 
 const inter = Inter({ subsets: ["latin"] });
 

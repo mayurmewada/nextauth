@@ -9,7 +9,6 @@ dbConnect();
 export const POST = async (request: NextRequest) => {
     try {
         const { token } = await request.json();
-        console.log(token);
         const isUserFound = await userModel.findOne({ verifyToken: token, verifyTokenExpiry: { $gt: Date.now() } });
         if (!isUserFound) {
             return NextResponse.json({

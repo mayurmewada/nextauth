@@ -1,5 +1,7 @@
+// module imports
 import nodemailer from "nodemailer";
 import bcryptjs from "bcryptjs";
+// file imports
 import User from "@/models/user.model";
 
 export const sendEmail = async ({ email, emailType, userId }: any) => {
@@ -62,7 +64,6 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         };
 
         const mailResponse = await transporter.sendMail(mailOption);
-        console.log("user registered and email sent successfully")
         return mailResponse;
     } catch (error: any) {
         throw new error(error);

@@ -1,5 +1,8 @@
+
+// module imports
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
+// file imports
 import { dbConnect } from "@/db/connection";
 import userModel from"@/models/user.model";
 import { sendEmail } from "@/helpers/mailer";
@@ -9,7 +12,6 @@ dbConnect();
 export const POST = async (request: NextRequest) => {
     try {
         const requestBody = await request.json();
-        console.log(requestBody);
         const { username, email, password } = requestBody;
 
         const user = await userModel.findOne({ email });
@@ -24,8 +26,6 @@ export const POST = async (request: NextRequest) => {
                 email,
                 password: hashedPassword,
             });
-            // const userCreated = await newUser.save();
-            console.log(newUser);
 
             await sendEmail({ email, emailType: "VERIFY", userId: newUser._id });
             return NextResponse.json({

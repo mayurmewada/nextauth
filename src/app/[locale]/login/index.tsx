@@ -7,14 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import store, { AppDispatch, AppStore } from "@/redux/store"; // Import the AppDispatch type
 
 const Index = (t: any) => {
-    const [email, setEmail] = useState<any>("demouser@domain.com");
+    const [formData, setFormData] = useState<any>({});
     const dispatch: AppDispatch = useDispatch();
     const loading = useSelector((store: AppStore) => store.admin);
 
-    console.log(loading);
+    const handleOnChange = ({ target }: any) => {
+        const { name, value } = target;
+        console.log(name, value);
+        setFormData({ ...formData, [name]: value });
+    };
 
     const handleLoginSubmit = () => {
-        dispatch(getAllUsers(email));
+        dispatch(getAllUsers(formData));
     };
 
     return (
@@ -24,11 +28,11 @@ const Index = (t: any) => {
             <div className="flex flex-col gap-5">
                 <div className="flex flex-col">
                     <label htmlFor="email">{"formEmailLabel"}</label>
-                    <input className="border border-[#dddddd]" type="text" name="email" />
+                    <input onChange={handleOnChange} className="border border-[#dddddd]" type="text" name="email" />
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="password">{"formPasswordLabel"}</label>
-                    <input className="border border-[#dddddd]" type="password" name="password" />
+                    <input onChange={handleOnChange} className="border border-[#dddddd]" type="password" name="password" />
                 </div>
                 <div className="flex flex-col">
                     <button onClick={handleLoginSubmit} className="rounded-[4px] border-[1px] border-slate-300 hover:border-slate-400">

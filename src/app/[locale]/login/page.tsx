@@ -3,7 +3,6 @@ import { useTranslations } from "next-intl";
 import Page from "./index";
 
 const page = () => {
-    console.log("login");
     console.log(useTranslations("login"));
     const t = useTranslations("login");
     return <Page />;

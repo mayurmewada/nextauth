@@ -12,11 +12,8 @@ const Index = (t: any) => {
 
     const handleOnChange = ({ target }: any) => {
         const { name, value } = target;
-        console.log(name, value);
         setFormData({ ...formData, [name]: value });
     };
-
-    console.log(isLoading);
 
     const handleLoginSubmit = () => {
         dispatch(login(formData));

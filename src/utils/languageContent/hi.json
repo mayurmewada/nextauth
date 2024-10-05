@@ -1,11 +1,20 @@
 {
-    "login": {
-        "loginToNextAuth": "नेक्स्ट ऑथ में लॉगइन करें",
-        "allFieldRequired": "सभी फ़ील्ड आवश्यक हैं",
-        "formEmailLabel": "ईमेल",
-        "formPasswordLabel": "पासवर्ड"
+    "fields": {
+        "email": {
+            "title": "ईमेल"
+        },
+        "password": {
+            "title": "पासवर्ड"
+        }
     },
-    "productDetails": {
+    "buttons": {
+        "login": "लॉग इन करें"
+    },
+    "texts": {
+        "loginToNextAuth": "नेक्स्ट ऑथ में लॉगइन करें",
         "youAreViewingProduct": "आप उत्पाद देख रहे हैं"
+    },
+    "errors": {
+        "allFieldRequired": "सभी फ़ील्ड आवश्यक हैं"
     }
 }

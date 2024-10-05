@@ -1,11 +1,20 @@
 {
-    "login": {
-        "loginToNextAuth": "Login to Next Auth",
-        "allFieldRequired": "All Fields are Required",
-        "formEmailLabel": "Email",
-        "formPasswordLabel": "Password"
+    "fields": {
+        "email": {
+            "title": "Email"
+        },
+        "password": {
+            "title": "Password"
+        }
     },
-    "productDetails": {
+    "buttons": {
+        "login": "Login"
+    },
+    "texts": {
+        "loginToNextAuth": "Login to Next Auth",
         "youAreViewingProduct": "You are viewing product"
+    },
+    "errors": {
+        "allFieldRequired": "All Fields are Required"
     }
 }

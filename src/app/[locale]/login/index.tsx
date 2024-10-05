@@ -5,10 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import store, { AppDispatch, AppStore } from "@/redux/store"; // Import the AppDispatch type
 import { login } from "@/redux/slices/authSlice";
 
-const Index = (t: any) => {
+const Index = ({ lang }: any) => {
     const [formData, setFormData] = useState<any>({});
     const dispatch: AppDispatch = useDispatch();
-    const {isLoading}:any = useSelector((store: AppStore) => store.authSlice);
+    const { isLoading }: any = useSelector((store: AppStore) => store.authSlice);
 
     const handleOnChange = ({ target }: any) => {
         const { name, value } = target;
@@ -27,20 +27,20 @@ const Index = (t: any) => {
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                 </svg>
             )}
-            <h1 className="mb-4">{"loginToNextAuth"}</h1>
-            <p className="mb-7">{"allFieldRequired"}</p>
+            <h1 className="mb-4">{lang.texts.loginToNextAuth}</h1>
+            <p className="mb-7">{lang.errors.allFieldRequired}</p>
             <div className="flex flex-col gap-5">
                 <div className="flex flex-col">
-                    <label htmlFor="email">{"formEmailLabel"}</label>
+                    <label htmlFor="email">{lang.fields.email.title}</label>
                     <input onChange={handleOnChange} className="border border-[#dddddd]" type="text" name="email" />
                 </div>
                 <div className="flex flex-col">
-                    <label htmlFor="password">{"formPasswordLabel"}</label>
+                    <label htmlFor="password">{lang.fields.password.title}</label>
                     <input onChange={handleOnChange} className="border border-[#dddddd]" type="password" name="password" />
                 </div>
                 <div className="flex flex-col">
                     <button onClick={handleLoginSubmit} className="rounded-[4px] border-[1px] border-slate-300 hover:border-slate-400">
-                        Login
+                        {lang.buttons.login}
                     </button>
                 </div>
             </div>

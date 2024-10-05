@@ -12,7 +12,7 @@ export const GET = async (request: NextRequest) => {
             message: "Logout Successfull",
         });
 
-        response.cookies.set("token", "", { httpOnly: true });
+        response.cookies.set("NEXT_TOKEN", "", { httpOnly: true });
         return response;
     } catch (error) {
         return NextResponse.json({

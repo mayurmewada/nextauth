@@ -1,38 +1,36 @@
 // module imports
-import createMiddleware from "next-intl/middleware";
+import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-
-// const intlMiddleware = createMiddleware({
-//     locales: ["en", "hi"],
-//     defaultLocale: "en",
-// });
+import { middlewareTokenDecode } from "./helpers/middlewareTokenDecode";
 
 let locales = ["en", "hi"];
 let defaultLocale = "en";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
+    const getPathLocale = pathname.split("/")[1];
     const pathnameHasLocale = locales.some((locale) => pathname.startsWith(`/${locale}`) || pathname === `/${locale}`);
 
+    const isCookie: any = request.cookies.get("NEXT_TOKEN");
+    const decodedToken = await middlewareTokenDecode(isCookie?.value);
+
+    const isProtectedRoute = pathname.split("/")[2] == "profile";
+    const isAdminProtectedRoute = pathname.split("/")[2] == "admin";
+
+    if (isAdminProtectedRoute && !decodedToken?.isAdmin) {
+        return NextResponse.error();
+    }
+    if ((isProtectedRoute || isAdminProtectedRoute) && !isCookie) {
+        return NextResponse.redirect(new URL(`/${getPathLocale == "hi" ? "hi" : defaultLocale}/login`, request.url));
+    }
     if (pathnameHasLocale) return;
 
     request.nextUrl.pathname = `/${defaultLocale}${pathname}`;
-
-    const isCookie = request.cookies.get("token");
-    const cookie = request.cookies.get("NEXT_LOCALE");
-    console.log(isCookie, cookie);
-
-    // Protected route logic
-    const isProtectedRoute = request.nextUrl.pathname.split("/")[2] == "admin";
-
-    if (isProtectedRoute && !isCookie) {
-        return NextResponse.redirect(new URL(`/${pathnameHasLocale || defaultLocale}/login`, request.url));
-    }
 
     return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {
-    matcher: ["/admin", "/", "/(hi|en)/:path*", "/((?!api|_next/static|_next/image|favicon.ico).*)"],
+    matcher: ["/admin", "/profile", "/", "/(hi|en)/:path*", "/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

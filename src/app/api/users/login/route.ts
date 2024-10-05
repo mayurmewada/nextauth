@@ -16,13 +16,13 @@ export const POST = async (request: NextRequest, response: NextResponse) => {
         if (isUserFound) {
             const isPasswordMatch = bcrypt.compareSync(password, isUserFound.password);
             if (isPasswordMatch) {
-                const token = jwt.sign({ id: isUserFound._id }, process.env.SECRETKEY!, { expiresIn: 3600000 * 24 * 7 });
+                const token = jwt.sign({ id: isUserFound._id, isAdmin: isUserFound.isAdmin }, process.env.SECRETKEY!, { expiresIn: 3600000 * 24 * 7 });
                 const response = NextResponse.json({
                     status: 200,
                     message: "User logged in Successfully",
                     token,
                 });
-                response.cookies.set("token", token, { httpOnly: true });
+                response.cookies.set("NEXT_TOKEN", token, { httpOnly: true });
                 return response;
             } else {
                 return NextResponse.json({

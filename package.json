@@ -12,6 +12,7 @@
     "@reduxjs/toolkit": "^2.2.4",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
+    "jose": "^5.9.3",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.5.4",

@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const Index = () => {
-    const {isLoading, user} = useSelector((store: AppStore) => store.userSlice);
+    const {isLoading, user}:any = useSelector((store: AppStore) => store.userSlice);
     const dispatch:AppDispatch = useDispatch()
 
     useEffect(() => {

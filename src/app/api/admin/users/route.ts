@@ -8,7 +8,7 @@ dbConnect();
 
 export const GET = async (request: NextRequest, response: NextResponse) => {
     try {
-        const getAllUsers = await userModel.find()
+        const getAllUsers = await userModel.find().select("-password")
         console.log("getAllUsers", getAllUsers)
         return NextResponse.json({
             status: 200,

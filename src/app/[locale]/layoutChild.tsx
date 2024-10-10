@@ -3,6 +3,7 @@ import React from "react";
 import LanguageSelector from "@/app/components/LanguageSelector";
 import { Provider } from "react-redux";
 import store from "@/redux/store";
+import 'remixicon/fonts/remixicon.css'
 
 const layoutIndex = ({font, currentUrl, params, children}:any) => {
     return (

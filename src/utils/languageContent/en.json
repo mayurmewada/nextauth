@@ -1,5 +1,8 @@
 {
     "fields": {
+        "username": {
+            "title": "Username"
+        },
         "email": {
             "title": "Email"
         },
@@ -8,10 +11,12 @@
         }
     },
     "buttons": {
-        "login": "Login"
+        "login": "Login",
+        "signup": "Signup"
     },
     "texts": {
         "loginToNextAuth": "Login to Next Auth",
+        "signupToNextAuth": "Signup to Next Auth",
         "youAreViewingProduct": "You are viewing product"
     },
     "errors": {

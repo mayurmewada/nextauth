@@ -5,11 +5,11 @@ const authSlice = createSlice({
     name: "auth",
     initialState: {
         isLoading: false,
-        userDetail: {}
+        userDetail: {},
     },
     reducers: {
-        loading: (state, {payload}) => {
-            console.log(payload)
+        loading: (state, { payload }) => {
+            console.log(payload);
             state.isLoading = payload;
         },
         loginSuccess: (state, action) => {},
@@ -29,6 +29,20 @@ export const login = (payload: any) => {
             dispatch(loading(false));
         } catch (error) {
             console.log(error);
+            dispatch(loading(false));
+        }
+    };
+};
+
+export const signup = (payload: any) => {
+    return async (dispatch: any) => {
+        try {
+            dispatch(loading(true));
+            const url = `http://localhost:3000/api/users/signup`;
+            const res: any = await axios.post(url, payload);
+            console.log(res?.data);
+            dispatch(loading(false));
+        } catch (error) {
             dispatch(loading(false));
         }
     };

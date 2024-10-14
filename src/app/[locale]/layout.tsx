@@ -1,5 +1,6 @@
 // module imports
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 // file imports
 import "./globals.css";
 import Page from "./layoutChild";

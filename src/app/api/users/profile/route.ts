@@ -10,7 +10,6 @@ dbConnect();
 export const POST = async (request: NextRequest) => {
     try {
         const decodedData = await verifyToken(request);
-        console.log("decodedData",decodedData)
         const userData = await userModel.findById({ _id: decodedData.id }).select("-password");
         return NextResponse.json({
             status: 200,

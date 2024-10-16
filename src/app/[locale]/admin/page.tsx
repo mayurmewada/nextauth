@@ -42,6 +42,9 @@ const Page = () => {
                             <th onClick={() => handleSortTable("username")} className="py-2 px-5 border-[1px] border-Grey cursor-pointer">
                                 Username <i className="ri-arrow-up-down-fill"></i>
                             </th>
+                            <th onClick={() => handleSortTable("username")} className="py-2 px-5 border-[1px] border-Grey cursor-pointer">
+                                Actions
+                            </th>
                         </tr>
                         {tableData && tableData.length >= 1 ? (
                             tableData.map((user: any) => (
@@ -49,6 +52,9 @@ const Page = () => {
                                     <td className="py-2 px-5 border-[1px] border-Grey">{user?._id}</td>
                                     <td className="py-2 px-5 border-[1px] border-Grey">{user?.email}</td>
                                     <td className="py-2 px-5 border-[1px] border-Grey">{user?.username}</td>
+                                    <td className="py-2 px-5 border-[1px] border-Grey flex items-center gap-5">
+                                        <i className="ri-delete-bin-6-fill"></i>
+                                    </td>
                                 </tr>
                             ))
                         ) : (

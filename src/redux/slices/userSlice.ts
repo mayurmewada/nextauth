@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { url } from "inspector";
 
 const userSlice = createSlice({
     name: "userSlice",
@@ -8,7 +9,7 @@ const userSlice = createSlice({
         user: {},
     },
     reducers: {
-        getProfileSuccess: (state, {payload}) => {
+        getProfileSuccess: (state, { payload }) => {
             state.user = payload;
         },
     },
@@ -23,7 +24,18 @@ export const getProfile = () => {
             const res = await axios.post(url);
             dispatch(getProfileSuccess(res.data.userData));
         } catch (error) {
-            console.log(error);
+            console.log("error from /userlice/getProfile", error);
+        }
+    };
+};
+
+export const logoutUser = () => {
+    return async (dispatch: any) => {
+        try {
+            const url = `http://localhost:3000/api/users/logout`;
+            const res = await axios.get(url);
+        } catch (error) {
+            console.log("error from /userlice/logout", error);
         }
     };
 };

@@ -30,7 +30,7 @@ export const POST = async (request: NextRequest) => {
             await sendEmail({ email, emailType: "VERIFY", userId: newUser._id });
             return NextResponse.json({
                 status: 200,
-                message: "User Register Successfully",
+                message: "User Registered Successfully",
                 newUser
             });
         }

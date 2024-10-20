@@ -58,4 +58,17 @@ export const signup = (payload: any) => {
     };
 };
 
+export const verifyEmail = (payload:any) => {
+    return async (dispatch:any) => {
+        try {
+            const url = `http://localhost:3000/api/users/verify`;
+            const res:any = await axios.post(url, payload);
+            console.log(payload)
+            console.log(res?.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
 export default authSlice.reducer;

@@ -18,7 +18,7 @@ const Index = ({ lang, userToken }: any) => {
             <div className="flex justify-center items-center min-h-[80vh]">
                 <div className="flex flex-col items-center gap-5">
                     <p>Click below verify to verify the user</p>
-                    <button onClick={handleOnClick} className="rounded-[4px] border-[1px] border-slate-300 hover:border-slate-400">
+                    <button onClick={handleOnClick} className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow w-auto">
                         Verify
                     </button>
                 </div>

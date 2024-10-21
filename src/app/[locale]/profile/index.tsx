@@ -12,8 +12,6 @@ const Index = () => {
         dispatch(getProfile())
     }, [])
 
-    console.log("profile", user);
-
     return (
         <div className="container h-[100vh]">
             <h6 className="text-center mt-12">Hello {user?.username}</h6>

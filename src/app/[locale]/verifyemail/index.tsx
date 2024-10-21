@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 
 const Index = ({ lang, userToken }: any) => {
     const dispatch: AppDispatch = useDispatch();
-    console.log(userToken.token);
 
     const handleOnClick = () => {
         dispatch(verifyEmail({token: userToken.token}));

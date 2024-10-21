@@ -29,7 +29,6 @@ export const getAllUsers = () => {
             dispatch(getAllUsersSuccess(res.data));
             dispatch(loading(false));
         } catch (error) {
-            console.log(error);
             dispatch(loading(false));
         }
     };

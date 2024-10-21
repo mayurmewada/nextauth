@@ -20,7 +20,7 @@ const LanguageSelector = ({ locale, currentUrl }: { locale: string; currentUrl: 
     };
 
     const handleLogout = () => {
-        dispatch(logoutUser());
+        dispatch(logoutUser(router));
     };
 
     return (
@@ -29,7 +29,7 @@ const LanguageSelector = ({ locale, currentUrl }: { locale: string; currentUrl: 
                 <option value="en">English</option>
                 <option value="hi">Hindi</option>
             </select>
-            <i onClick={handleLogout} className="ri-logout-box-r-line cursor-pointer text-[18px] font-semibold ml-7"></i>
+            {(url[1] === "login") || (url[1] === "signup") ? <></> : <i onClick={handleLogout} className="ri-logout-box-r-line cursor-pointer text-[18px] font-semibold ml-7"></i>}
         </div>
     );
 };

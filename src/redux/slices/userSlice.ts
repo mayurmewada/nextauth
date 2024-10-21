@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { url } from "inspector";
+import toast from "react-hot-toast";
 
 const userSlice = createSlice({
     name: "userSlice",
@@ -24,18 +25,18 @@ export const getProfile = () => {
             const res = await axios.post(url);
             dispatch(getProfileSuccess(res.data.userData));
         } catch (error) {
-            console.log("error from /userlice/getProfile", error);
         }
     };
 };
 
-export const logoutUser = () => {
+export const logoutUser = (router:any) => {
     return async (dispatch: any) => {
         try {
             const url = `http://localhost:3000/api/users/logout`;
             const res = await axios.get(url);
+            toast.success(`${res?.data.message}`);
+            router.push("/login")
         } catch (error) {
-            console.log("error from /userlice/logout", error);
         }
     };
 };

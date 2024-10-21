@@ -8,7 +8,6 @@ const Page = () => {
     const dispatch: AppDispatch = useDispatch();
     const { isLoading, users } = useSelector((store: any) => store.adminSlice);
     const [tableData, setTableData] = useState([null]);
-    console.log(users)
     useLayoutEffect(() => {
         dispatch(getAllUsers());
     }, []);

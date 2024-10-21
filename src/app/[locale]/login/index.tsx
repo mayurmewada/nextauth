@@ -13,8 +13,6 @@ const Index = ({ lang }: any) => {
     const dispatch: AppDispatch = useDispatch();
     const { isLoading }: any = useSelector((store: AppStore) => store.authSlice);
 
-    console.log(formData)
-
     const handleOnChange = ({ target }: any) => {
         const { name, value } = target;
         setFormData({ ...formData, [name]: value });
@@ -37,7 +35,7 @@ const Index = ({ lang }: any) => {
                             </label>
                         </div>
                         <div className="md:w-2/3">
-                            <input onChange={handleOnChange} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#a69cac]" id="inline-email" type="email" placeholder="Jane Doe" />
+                            <input onChange={handleOnChange} name="email" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#a69cac]" id="inline-email" type="email" placeholder="Jane Doe" />
                         </div>
                     </div>
                     <div className="md:flex md:items-center mb-6">
@@ -47,7 +45,7 @@ const Index = ({ lang }: any) => {
                             </label>
                         </div>
                         <div className="md:w-2/3">
-                            <input onChange={handleOnChange} className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#a69cac]" id="inline-password" type="password" placeholder="********" />
+                            <input onChange={handleOnChange} name="password" className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-[#a69cac]" id="inline-password" type="password" placeholder="********" />
                         </div>
                     </div>
                     {/* <div className="md:flex md:items-center mb-6">

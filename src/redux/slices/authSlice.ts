@@ -11,7 +11,6 @@ const authSlice = createSlice({
     },
     reducers: {
         loading: (state, { payload }) => {
-            console.log(payload);
             state.isLoading = payload;
         },
         loginSuccess: (state, action) => {},
@@ -32,43 +31,45 @@ export const login = (payload: any, router: any) => {
                 toast.error(`${res?.data.message}`);
             } else if (res?.data.status === 200) {
                 toast.success(`${res?.data.message}`);
-                router.push("/profile")
+                router.push("/profile");
             }
-            console.log(res?.data);
             dispatch(loginSuccess(res.data));
             dispatch(loading(false));
         } catch (error) {
-            console.log(error);
             dispatch(loading(false));
         }
     };
 };
 
-export const signup = (payload: any) => {
+export const signup = (payload: any, router: any) => {
     return async (dispatch: any) => {
         try {
             dispatch(loading(true));
             const url = `http://localhost:3000/api/users/signup`;
             const res: any = await axios.post(url, payload);
-            console.log(res?.data);
             dispatch(loading(false));
+            if (res?.data.status === 404) {
+                toast.error(`${res?.data.message}`);
+            } else if (res?.data.status === 401) {
+                toast.error(`${res?.data.message}`);
+            } else if (res?.data.status === 200) {
+                toast.success(`${res?.data.message}`);
+                router.push("/login");
+            }
         } catch (error) {
             dispatch(loading(false));
         }
     };
 };
 
-export const verifyEmail = (payload:any) => {
-    return async (dispatch:any) => {
+export const verifyEmail = (payload: any) => {
+    return async (dispatch: any) => {
         try {
             const url = `http://localhost:3000/api/users/verify`;
-            const res:any = await axios.post(url, payload);
-            console.log(payload)
-            console.log(res?.data)
+            const res: any = await axios.post(url, payload);
         } catch (error) {
-            console.log(error)
         }
-    }
-}
+    };
+};
 
 export default authSlice.reducer;
